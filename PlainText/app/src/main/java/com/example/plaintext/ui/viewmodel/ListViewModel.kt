@@ -26,30 +26,20 @@ data class ListViewState(
     var isCollected: Boolean = false
 )
 
+//Utilize o passwordBDStore para obter a lista de senhas e salva-las
 @HiltViewModel
-open class ListViewModel @Inject constructor(
-    private val passwordDBStore: PasswordDBStore
-) : ViewModel() {
-
-    var listViewState by mutableStateOf(
-        ListViewState(passwordList = emptyList())
-    )
+open class ListViewModel @Inject constructor () : ViewModel() {
+    var listViewState by mutableStateOf(ListViewState(passwordList = emptyList()))
         private set
 
-    init {
+    init{
         viewModelScope.launch {
-            passwordDBStore.getList().collect { passwords ->
-                listViewState = listViewState.copy(
-                    passwordList = passwords.map { it.asExternalModel() },
-                    isCollected = true
-                )
+                //execute o metodo getList() do passwordDBStore e colete o resultado
             }
         }
+
+
+    fun savePassword(password: PasswordInfo){
+
     }
-}
-
-
-fun savePassword(password: PasswordInfo){
-
-}
 }
