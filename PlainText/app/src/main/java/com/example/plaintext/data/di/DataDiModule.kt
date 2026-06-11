@@ -21,14 +21,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataDiModule {
-
     @Provides
     @Singleton
-    fun providePasswordDBStore(
+    fun providePasswordDao(
         passwordDao: PasswordDao
-    ): PasswordDBStore = PasswordDBStore(passwordDao)
+    ): PasswordDBStore = LocalPasswordDBStore(passwordDao)
 
     @Provides
-    @Singleton
-    fun provideDBSimulator(): dbSimulator = dbSimulator()
+	@Singleton
+	fun provideDBSimulator(): dbSimulator = dbSimulator()
 }

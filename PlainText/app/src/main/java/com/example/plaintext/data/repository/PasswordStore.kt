@@ -2,31 +2,42 @@ package com.example.plaintext.data.repository
 
 import com.example.plaintext.data.dao.PasswordDao
 import com.example.plaintext.data.model.Password
+import com.example.plaintext.data.model.PasswordInfo
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class PasswordDBStore @Inject constructor(
-    private val passwordDao: PasswordDao
-) {
+interface PasswordDBStore {
+    fun getList(): Flow<List<Password>>
+    suspend fun add(password: Password): Long
+    suspend fun update(password: Password)
+    fun get(id: Int): Password?
+    suspend fun save(passwordInfo: PasswordInfo)
+    suspend fun isEmpty(): Flow<Boolean>
+}
 
-    fun passwords(): Flow<List<Password>> =
-        passwordDao.getAll()
+class LocalPasswordDBStore(
+    private val passwordDao : PasswordDao
+): PasswordDBStore {
+    override fun getList(): Flow<List<Password>> {
+        TODO("Not yet implemented")
+    }
 
-    fun password(id: Int): Flow<Password?> =
-        passwordDao.getById(id)
+    override suspend fun add(password: Password): Long {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun insert(password: Password) =
-        passwordDao.insert(password)
+    override suspend fun update(password: Password) {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun update(password: Password) =
-        passwordDao.update(password)
+    override fun get(id: Int): Password? {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun delete(password: Password) =
-        passwordDao.delete(password)
+    override suspend fun save(passwordInfo: PasswordInfo) {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun count(): Int =
-        passwordDao.count()
-
-    suspend fun deleteAll() =
-        passwordDao.deleteAll()
+    override suspend fun isEmpty(): Flow<Boolean> {
+        TODO("Not yet implemented")
+    }
 }
