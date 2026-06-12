@@ -4,6 +4,7 @@ import com.example.plaintext.data.dao.PasswordDao
 import com.example.plaintext.data.model.Password
 import com.example.plaintext.data.model.PasswordInfo
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 
 interface PasswordDBStore {
     fun getList(): Flow<List<Password>>
@@ -18,26 +19,38 @@ class LocalPasswordDBStore(
     private val passwordDao : PasswordDao
 ): PasswordDBStore {
     override fun getList(): Flow<List<Password>> {
-        TODO("Not yet implemented")
+        return passwordDao.getAll()
     }
 
     override suspend fun add(password: Password): Long {
-        TODO("Not yet implemented")
+        return passwordDao.insert(password)
     }
 
     override suspend fun update(password: Password) {
-        TODO("Not yet implemented")
+        passwordDao.update(password)
     }
 
     override fun get(id: Int): Password? {
-        TODO("Not yet implemented")
+        return kotlinx.coroutines.runBlocking {
+            passwordDao.getById(id).firstOrNull()
+        }
     }
 
     override suspend fun save(passwordInfo: PasswordInfo) {
-        TODO("Not yet implemented")
+        passwordDao.insert(
+            Password(
+                id = passwordInfo.id,
+                name = passwordInfo.name,
+                login = passwordInfo.login,
+                password = passwordInfo.password,
+                notes = passwordInfo.notes
+            )
+        )
     }
 
     override suspend fun isEmpty(): Flow<Boolean> {
-        TODO("Not yet implemented")
+        return kotlinx.coroutines.flow.flow {
+            emit(passwordDao.count() == 0)
+        }
     }
 }

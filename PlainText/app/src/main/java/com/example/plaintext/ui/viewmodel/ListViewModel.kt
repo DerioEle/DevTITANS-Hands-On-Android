@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.plaintext.data.dao.PasswordDao
 import com.example.plaintext.data.model.Password
 import com.example.plaintext.data.model.PasswordInfo
+import com.example.plaintext.data.model.asExternalModel
 import com.example.plaintext.data.repository.LocalPasswordDBStore
 import com.example.plaintext.data.repository.PasswordDBStore
 import dagger.hilt.android.lifecycle.HiltViewModel
