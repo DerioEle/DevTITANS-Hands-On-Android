@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
@@ -46,7 +47,24 @@ import com.example.plaintext.data.model.PasswordInfo
 
 @Composable
 fun ListView(
-) {}
+    modifier: Modifier = Modifier,
+    viewModel: ListViewModel = hiltViewModel(),
+    navigateToEdit: (PasswordInfo) -> Unit = {},
+    navigateToAdd: () -> Unit = {}
+) {
+    val listViewState = viewModel.listViewState
+
+    Scaffold(
+        topBar = { TopBarComponent() },
+        floatingActionButton = { AddButton(onClick = navigateToAdd) }
+    ) { paddingValues ->
+        ListItemContent(
+            modifier = modifier.padding(paddingValues),
+            listState = listViewState,
+            navigateToEdit = navigateToEdit
+        )
+    }
+}
 
 @Composable
 fun AddButton(onClick: () -> Unit) {
