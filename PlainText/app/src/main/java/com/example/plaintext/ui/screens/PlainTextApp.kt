@@ -39,7 +39,14 @@ fun PlainTextApp(
         composable<Screen.Login>{
             Login_screen(
                 navigateToSettings = {},
-                navigateToList = {}
+                navigateToList = appState::navigateToList
+            )
+        }
+
+        composable<Screen.List> {
+            ListView(
+                navigateToEdit = { password -> appState.navigateToEdit(password) },
+                navigateToAdd = { appState.navigateToAdd() }
             )
         }
         composable<Screen.EditList>(
