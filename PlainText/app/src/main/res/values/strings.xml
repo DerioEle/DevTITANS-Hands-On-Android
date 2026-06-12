@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PlainText</string>
     <string name="login">"Login: "</string>
+    <string name="input_name">Nome</string>
+    <string name="input_user">Usuário</string>
+    <string name="input_password">Senha</string>
+    <string name="input_notes">Notas</string>
 </resources>
