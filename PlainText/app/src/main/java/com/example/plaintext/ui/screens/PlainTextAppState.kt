@@ -67,6 +67,19 @@ class JetcasterAppState(
     fun navigateToPreferences() {
         navController.navigate(Screen.Preferences)
     }
+    fun navigateToList(){
+        navController.navigate(Screen.List)
+    }
+
+    fun navigateToEdit(password: PasswordInfo){
+        navController.navigate(Screen.EditList(password))
+    }
+
+    fun navigateToAdd(){
+        // Navigate to EditList with an empty PasswordInfo for creating a new entry
+        navController.navigate(Screen.EditList(PasswordInfo(0, "", "", "", null)))
+    }
+
 }
 
 /**

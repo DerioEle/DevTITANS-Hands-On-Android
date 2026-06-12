@@ -32,6 +32,15 @@ fun PlainTextApp(
                     appState.navigateToPreferences()
                 },
                 navigateToList = {}
+                navigateToSettings = {},
+                navigateToList = appState::navigateToList
+            )
+        }
+
+        composable<Screen.List> {
+            ListView(
+                navigateToEdit = { password -> appState.navigateToEdit(password) },
+                navigateToAdd = { appState.navigateToAdd() }
             )
         }
 
