@@ -1,4 +1,6 @@
 package com.example.plaintext.ui.screens.login
+import com.example.plaintext.ui.viewmodel.LoginViewModel
+import com.example.plaintext.ui.viewmodel.LoginUiState
 
 import android.util.Log
 import android.widget.Toast
@@ -56,6 +58,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.plaintext.R
 import com.example.plaintext.ui.viewmodel.PreferencesViewModel
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ButtonDefaults // Ou material se estiver usando M2
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.plaintext.ui.theme.PlainTextTheme
+
 data class LoginState(
     val preencher: Boolean,
     val login: String,
@@ -68,9 +76,27 @@ data class LoginState(
 fun Login_screen(
     navigateToSettings: () -> Unit,
     navigateToList: () -> Unit,
-    viewModel: PreferencesViewModel = hiltViewModel()
+    viewModel: LoginViewModel = hiltViewModel()
 ) {
+    val state = viewModel.uiState
 
+    Scaffold(
+        topBar = {
+            TopBarComponent(
+                navigateToSettings = navigateToSettings,
+                navigateToSensores = {}
+            )
+        }
+    ) { innerPadding ->
+        LoginContent(
+            paddingDoScaffold = innerPadding,
+            loginState = state,
+            onLoginChanged = { viewModel.onLoginChanged(it) },
+            onPasswordChanged = { viewModel.onPasswordChanged(it) },
+            onSaveCredentialsChanged = { viewModel.onSaveCredentialsChanged(it) },
+            onBotaoEnviarClick = navigateToList
+        )
+    }
 }
 
 @Composable
@@ -140,4 +166,80 @@ fun TopBarComponent(
             }
         }
     )
+}
+
+@Composable
+fun LoginContent(
+    paddingDoScaffold: PaddingValues,
+    loginState: LoginUiState,
+    onLoginChanged: (String) -> Unit,
+    onPasswordChanged: (String) -> Unit,
+    onSaveCredentialsChanged: (Boolean) -> Unit,
+    onBotaoEnviarClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingDoScaffold)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        OutlinedTextField(
+            value = loginState.loginText,
+            onValueChange = onLoginChanged,
+            label = { Text("Login") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            value = loginState.passwordText,
+            onValueChange = onPasswordChanged,
+            label = { Text("Senha") },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Checkbox(
+                checked = loginState.isSaveCredentialsChecked,
+                onCheckedChange = onSaveCredentialsChanged
+            )
+            Text("Salvar as informações de login")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = onBotaoEnviarClick,
+            enabled = loginState.isButtonEnabled, // Vinculando o estado do botão
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Enviar")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    PlainTextTheme {
+        LoginContent(
+            paddingDoScaffold = PaddingValues(0.dp),
+            // Passando um estado vazio só para o Preview desenhar a tela
+            loginState = LoginUiState(),
+            onLoginChanged = {},
+            onPasswordChanged = {},
+            onSaveCredentialsChanged = {},
+            onBotaoEnviarClick = {}
+        )
+    }
 }

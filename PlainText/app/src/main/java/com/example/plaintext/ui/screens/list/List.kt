@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
@@ -38,7 +37,6 @@ import com.example.plaintext.R
 import com.example.plaintext.ui.screens.login.TopBarComponent
 import com.example.plaintext.ui.viewmodel.ListViewModel
 import com.example.plaintext.ui.viewmodel.ListViewState
-import com.example.plaintext.ui.theme.PlainTextTheme
 import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -48,24 +46,7 @@ import com.example.plaintext.data.model.PasswordInfo
 
 @Composable
 fun ListView(
-    modifier: Modifier = Modifier,
-    viewModel: ListViewModel = hiltViewModel(),
-    navigateToEdit: (PasswordInfo) -> Unit = {},
-    navigateToAdd: () -> Unit = {}
-) {
-    val listViewState = viewModel.listViewState
-
-    Scaffold(
-        topBar = { TopBarComponent() },
-        floatingActionButton = { AddButton(onClick = navigateToAdd) }
-    ) { paddingValues ->
-        ListItemContent(
-            modifier = modifier.padding(paddingValues),
-            listState = listViewState,
-            navigateToEdit = navigateToEdit
-        )
-    }
-}
+) {}
 
 @Composable
 fun AddButton(onClick: () -> Unit) {
@@ -150,34 +131,6 @@ fun ListItem(
             Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Menu",
             tint = Color.White
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ListScreenPreview() {
-    val sampleState = ListViewState(
-        passwordList = listOf(
-            PasswordInfo(1, "Twitter", "dev", "••••••", "conta dev"),
-            PasswordInfo(2, "Facebook", "devtitans", "••••••", null),
-            PasswordInfo(3, "Moodle", "dev.com", "••••••", "notes")
-        ),
-        isCollected = true
-    )
-
-    PlainTextTheme {
-        Scaffold(
-            topBar = { TopBarComponent() },
-            floatingActionButton = { AddButton(onClick = {}) }
-        ) { paddingValues ->
-            ListItemContent(
-                modifier = Modifier
-                    .padding(paddingValues)
-                    .fillMaxSize(),
-                listState = sampleState,
-                navigateToEdit = {}
-            )
-        }
     }
 }
 
