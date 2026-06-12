@@ -37,6 +37,10 @@ open class ListViewModel @Inject constructor(
         private set
 
     init {
+        collectPasswords()
+    }
+
+    private fun collectPasswords() {
         viewModelScope.launch {
             passwordDBStore.getList().collect { passwords ->
                 listViewState = listViewState.copy(

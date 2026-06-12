@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b9e6eaa-de55-49f7-aba3-db9c1d21a7a5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/PlainText/app/src/main/java/com/example/plaintext/data/dao/PasswordDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/PlainText/app/src/main/java/com/example/plaintext/data/dao/PasswordDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlainText/app/src/main/java/com/example/plaintext/data/di/DataDiModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/PlainText/app/src/main/java/com/example/plaintext/data/di/DataDiModule.kt" afterDir="false" />
-    </list>
+    <list default="true" id="1b9e6eaa-de55-49f7-aba3-db9c1d21a7a5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
