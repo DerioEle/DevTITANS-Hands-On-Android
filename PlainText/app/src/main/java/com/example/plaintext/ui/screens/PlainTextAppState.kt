@@ -1,17 +1,12 @@
 package com.example.plaintext.ui.screens
 
 import android.content.Context
-import android.net.Uri
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.plaintext.data.model.PasswordInfo
 import kotlinx.serialization.Serializable
@@ -50,7 +45,6 @@ fun rememberJetcasterAppState(
     JetcasterAppState(navController, context)
 }
 
-
 class JetcasterAppState(
     val navController: NavHostController,
     private val context: Context
@@ -62,14 +56,17 @@ class JetcasterAppState(
         return currentRoute != route
     }
 
-    fun navigateToHello(name: String?){
+    fun navigateToHello(name: String?) {
         navController.navigate(Screen.Hello(name))
     }
 
-    fun navigateToLogin(){
+    fun navigateToLogin() {
         navController.navigate(Screen.Login)
     }
 
+    fun navigateToPreferences() {
+        navController.navigate(Screen.Preferences)
+    }
     fun navigateToList(){
         navController.navigate(Screen.List)
     }
