@@ -6,7 +6,7 @@ import com.example.plaintext.data.model.Password
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-abstract class PasswordDao : BaseDao<Password>() {
+abstract class PasswordDao : BaseDao<Password> {
 
     @Query("SELECT * FROM passwords")
     abstract fun getAll(): Flow<List<Password>>
