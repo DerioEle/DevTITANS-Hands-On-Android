@@ -4,6 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.example.plaintext.ui.screens.list.ListView
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.plaintext.ui.viewmodel.ListViewModel
 import com.example.plaintext.data.model.PasswordInfo
 import com.example.plaintext.ui.screens.editList.EditList
 import com.example.plaintext.ui.screens.hello.Hello_screen
@@ -28,10 +31,6 @@ fun PlainTextApp(
 
         composable<Screen.Login> {
             Login_screen(
-                navigateToSettings = {
-                    appState.navigateToPreferences()
-                },
-                navigateToList = {}
                 navigateToSettings = {},
                 navigateToList = appState::navigateToList
             )
@@ -54,10 +53,12 @@ fun PlainTextApp(
             typeMap = mapOf(typeOf<PasswordInfo>() to parcelableType<PasswordInfo>())
         ) {
             val args = it.toRoute<Screen.EditList>()
+            val viewModel: ListViewModel = hiltViewModel()
+
             EditList(
                 args,
-                navigateBack = {},
-                savePassword = { password -> Unit }
+                navigateBack = appState::navigateToList,
+                savePassword = { password -> viewModel.savePassword(password) }
             )
         }
     }
