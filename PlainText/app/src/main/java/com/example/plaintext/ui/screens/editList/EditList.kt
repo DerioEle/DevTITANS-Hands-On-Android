@@ -1,7 +1,5 @@
 package com.example.plaintext.ui.screens.editList
 
-import androidx.compose.animation.core.copy
-import androidx.compose.foundation.background
 import com.example.plaintext.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,8 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -32,13 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.semantics.password
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.plaintext.data.model.PasswordInfo
 import com.example.plaintext.ui.screens.Screen
-import com.example.plaintext.ui.screens.login.TopBarComponent
-import java.nio.file.WatchEvent
 
 
 data class EditListState(
@@ -61,7 +54,6 @@ fun EditList(
 ) {
     Scaffold(
         topBar = {
-            //TopBarComponent()
             TopAppBar(
                 title = { Text(if (isPasswordEmpty(args.password)) "Adicionar nova senha" else "Editar senha")}
             )
