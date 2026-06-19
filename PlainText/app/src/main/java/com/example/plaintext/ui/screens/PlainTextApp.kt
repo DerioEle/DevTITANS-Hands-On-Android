@@ -21,7 +21,7 @@ fun PlainTextApp(
 ) {
     NavHost(
         navController = appState.navController,
-        startDestination = Screen.Hello("DevTITANS"),
+        startDestination = Screen.Login,
     )
     {
         composable<Screen.Hello> {
@@ -32,14 +32,7 @@ fun PlainTextApp(
         composable<Screen.Login> {
             Login_screen(
                 navigateToSettings = {},
-                navigateToList = appState::navigateToList
-            )
-        }
-
-        composable<Screen.List> {
-            ListView(
-                navigateToEdit = { password -> appState.navigateToEdit(password) },
-                navigateToAdd = { appState.navigateToAdd() }
+                navigateToList = {appState.navController.navigate(Screen.Hello("DevTITANS"))}
             )
         }
 
